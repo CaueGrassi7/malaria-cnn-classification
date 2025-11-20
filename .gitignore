@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# Data
+data/
+*.csv
+*.png
+*.jpg
+*.jpeg
+
+# Models
+models/*.h5
+models/*.keras
+models/*.pb
+models/*.ckpt
+
+# Keep model directory structure but not the large files
+!models/.gitkeep
+
+# IDE
+# .vscode/ - mantemos para configuração do ambiente
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Kaggle
+.kaggle/
+kaggle.json
+
