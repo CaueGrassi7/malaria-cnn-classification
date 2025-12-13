@@ -1,249 +1,249 @@
-# Malaria Detection using CNN - Estudo Comparativo
+# Malaria Detection using CNN - Comparative Study
 
-Implementação de um **estudo comparativo multi-experimento** para classificação de imagens de detecção de malária baseado no artigo **"Efficient deep learning-based approach for malaria detection using red blood cell smears"** (Scientific Reports, 2024).
+Implementation of a **multi-experiment comparative study** for malaria detection image classification based on the paper **"Efficient deep learning-based approach for malaria detection using red blood cell smears"** (Scientific Reports, 2024).
 
-## 📋 Descrição
+## 📋 Description
 
-Este projeto implementa e compara **3 configurações diferentes** de Redes Neurais Convolucionais (CNN) para classificar células sanguíneas em parasitadas (malária positivo) ou não infectadas, utilizando o dataset público "Malaria Cell Images Dataset" do Kaggle.
+This project implements and compares **3 different configurations** of Convolutional Neural Networks (CNN) to classify blood cells as parasitized (malaria positive) or uninfected, using the public "Malaria Cell Images Dataset" from Kaggle.
 
-### Características do Dataset
+### Dataset Characteristics
 
-- **Total**: 27.558 imagens (balanceado 50/50)
-- **Classes**: Parasitized (13.779) e Uninfected (13.779)
-- **Tamanho das imagens**: 50×50×3 pixels
-- **Fonte**: [Kaggle - Malaria Cell Images Dataset](https://www.kaggle.com/datasets/iarunava/cell-images-for-detecting-malaria)
+- **Total**: 27,558 images (balanced 50/50)
+- **Classes**: Parasitized (13,779) and Uninfected (13,779)
+- **Image size**: 50×50×3 pixels
+- **Source**: [Kaggle - Malaria Cell Images Dataset](https://www.kaggle.com/datasets/iarunava/cell-images-for-detecting-malaria)
 
-### Resultados Obtidos
+### Results Obtained
 
-- **Baseline (Paper)**: 93.34% de acurácia
-- **Alta Capacidade**: 94.32% de acurácia
-- **Augmentation Agressivo**: 94.61% de acurácia (melhor resultado)
-- **Acurácia reportada no paper**: 97.00%
+- **Baseline (Paper)**: 93.34% accuracy
+- **High Capacity**: 94.32% accuracy
+- **Aggressive Augmentation**: 94.61% accuracy (best result)
+- **Accuracy reported in paper**: 97.00%
 
-## 🏗️ Arquitetura dos Modelos
+## 🏗️ Model Architecture
 
-O projeto implementa **3 experimentos diferentes** para comparação:
+The project implements **3 different experiments** for comparison:
 
-### Experimento 1: Baseline (Paper) 🎯
+### Experiment 1: Baseline (Paper) 🎯
 
-Replicação exata da configuração do artigo de referência:
+Exact replication of the reference paper configuration:
 
-- **3 blocos convolucionais**: Conv2D (32, 64, 128 filtros) + ReLU
+- **3 convolutional blocks**: Conv2D (32, 64, 128 filters) + ReLU
 - MaxPooling2D (2×2) + BatchNormalization + Dropout (0.25)
-- **Camada densa**: 128 neurônios + ReLU + Dropout (0.5)
-- **Saída**: 1 neurônio com Sigmoid
-- **Total de parâmetros**: ~684K
+- **Dense layer**: 128 neurons + ReLU + Dropout (0.5)
+- **Output**: 1 neuron with Sigmoid
+- **Total parameters**: ~684K
 
-### Experimento 2: Alta Capacidade 🚀
+### Experiment 2: High Capacity 🚀
 
-Rede com maior capacidade para testar se mais parâmetros melhoram o desempenho:
+Network with higher capacity to test if more parameters improve performance:
 
-- **3 blocos convolucionais**: Conv2D (64, 128, 256 filtros) - **dobro da capacidade**
+- **3 convolutional blocks**: Conv2D (64, 128, 256 filters) - **double the capacity**
 - MaxPooling2D (2×2) + BatchNormalization + Dropout (0.3)
-- **Camada densa**: 256 neurônios + ReLU + Dropout (0.5)
-- **Saída**: 1 neurônio com Sigmoid
+- **Dense layer**: 256 neurons + ReLU + Dropout (0.5)
+- **Output**: 1 neuron with Sigmoid
 
-### Experimento 3: Augmentation Agressivo + Regularização 🎲
+### Experiment 3: Aggressive Augmentation + Regularization 🎲
 
-Data augmentation intenso e maior regularização para melhorar generalização:
+Intensive data augmentation and stronger regularization to improve generalization:
 
-- **3 blocos convolucionais**: Conv2D (32, 64, 128 filtros) - igual ao baseline
-- MaxPooling2D (2×2) + BatchNormalization + Dropout (0.4) - **maior regularização**
-- **Camada densa**: 128 neurônios + ReLU + Dropout (0.6)
-- **Saída**: 1 neurônio com Sigmoid
+- **3 convolutional blocks**: Conv2D (32, 64, 128 filters) - same as baseline
+- MaxPooling2D (2×2) + BatchNormalization + Dropout (0.4) - **stronger regularization**
+- **Dense layer**: 128 neurons + ReLU + Dropout (0.6)
+- **Output**: 1 neuron with Sigmoid
 
-## 🚀 Instalação
+## 🚀 Installation
 
-### 1. Clone o repositório
+### 1. Clone the repository
 
 ```bash
 git clone <repository-url>
 cd malaria-cnn-classification
 ```
 
-### 2. Crie e ative um ambiente virtual (Python 3.8+)
+### 2. Create and activate a virtual environment (Python 3.8+)
 
 ```bash
-# Criar ambiente virtual
+# Create virtual environment
 python3 -m venv venv
 
-# Ativar o ambiente virtual
-# No macOS/Linux:
+# Activate virtual environment
+# On macOS/Linux:
 source venv/bin/activate
 
-# No Windows:
+# On Windows:
 venv\Scripts\activate
 ```
 
-### 3. Instale as dependências
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configure a API do Kaggle
+### 4. Configure the Kaggle API
 
-Para baixar o dataset automaticamente, você precisa configurar suas credenciais do Kaggle:
+To automatically download the dataset, you need to configure your Kaggle credentials:
 
-1. Crie uma conta no [Kaggle](https://www.kaggle.com/)
-2. Vá em "Account" → "API" → "Create New API Token"
-3. Isso baixará um arquivo `kaggle.json`
-4. Coloque o arquivo no local apropriado:
+1. Create an account on [Kaggle](https://www.kaggle.com/)
+2. Go to "Account" → "API" → "Create New API Token"
+3. This will download a `kaggle.json` file
+4. Place the file in the appropriate location:
    - **Linux/Mac**: `~/.kaggle/kaggle.json`
    - **Windows**: `C:\Users\<username>\.kaggle\kaggle.json`
-5. Configure as permissões (Linux/Mac):
+5. Set the permissions (Linux/Mac):
    ```bash
    chmod 600 ~/.kaggle/kaggle.json
    ```
 
-## 📊 Uso
+## 📊 Usage
 
-### Executar o notebook completo
+### Run the complete notebook
 
 ```bash
 jupyter notebook malaria_detection.ipynb
 ```
 
-O notebook contém todas as etapas do estudo comparativo:
+The notebook contains all steps of the comparative study:
 
-1. Download e organização do dataset
-2. Análise exploratória dos dados
-3. Configuração dos 3 experimentos
-4. Construção das arquiteturas CNN
-5. Treinamento dos 3 modelos
-6. Avaliação e comparação dos resultados
-7. Geração de gráficos e tabelas comparativas
+1. Download and organize the dataset
+2. Exploratory data analysis
+3. Configuration of the 3 experiments
+4. Build the CNN architectures
+5. Train the 3 models
+6. Evaluate and compare results
+7. Generate comparative charts and tables
 
-### Estrutura do Projeto
+### Project Structure
 
 ```
 malaria-cnn-classification/
-├── malaria_detection.ipynb    # Notebook principal com estudo comparativo
-├── requirements.txt            # Dependências Python
-├── README.md                   # Documentação
-├── data/                       # Dataset (criado automaticamente)
+├── malaria_detection.ipynb    # Main notebook with comparative study
+├── requirements.txt            # Python dependencies
+├── README.md                   # Documentation
+├── data/                       # Dataset (created automatically)
 │   └── cell_images/
 │       ├── Parasitized/
 │       └── Uninfected/
-├── models/                     # Modelos treinados e métricas
-│   ├── baseline_paper_*         # Resultados do experimento 1
-│   ├── exp2_high_capacity_*     # Resultados do experimento 2
-│   ├── exp3_augmentation_*      # Resultados do experimento 3
-│   └── comparative_results.csv  # Tabela comparativa
-└── figures/                    # Gráficos e visualizações
-    ├── *_training_curves.png    # Curvas de treinamento
-    ├── *_confusion_matrix.png   # Matrizes de confusão
-    └── *_comparison.png         # Gráficos comparativos
+├── models/                     # Trained models and metrics
+│   ├── baseline_paper_*         # Experiment 1 results
+│   ├── exp2_high_capacity_*     # Experiment 2 results
+│   ├── exp3_augmentation_*      # Experiment 3 results
+│   └── comparative_results.csv  # Comparative table
+└── figures/                    # Charts and visualizations
+    ├── *_training_curves.png    # Training curves
+    ├── *_confusion_matrix.png   # Confusion matrices
+    └── *_comparison.png         # Comparative charts
 ```
 
-## 🔬 Metodologia
+## 🔬 Methodology
 
-### Pré-processamento (Comum a todos os experimentos)
+### Preprocessing (Common to all experiments)
 
-- **Redimensionamento**: 50×50×3 pixels
-- **Normalização**: [0, 1] (rescale=1./255)
-- **Split**: 80% treino (22.048 imagens) / 20% validação (5.510 imagens)
-- **Data augmentation**: Varia por experimento (ver detalhes abaixo)
+- **Resizing**: 50×50×3 pixels
+- **Normalization**: [0, 1] (rescale=1./255)
+- **Split**: 80% training (22,048 images) / 20% validation (5,510 images)
+- **Data augmentation**: Varies by experiment (see details below)
 
-### Configurações de Treinamento por Experimento
+### Training Configurations by Experiment
 
-#### Experimento 1: Baseline (Paper)
+#### Experiment 1: Baseline (Paper)
 
-- **Otimizador**: Adam (lr=0.0001)
+- **Optimizer**: Adam (lr=0.0001)
 - **Loss**: Binary Crossentropy
 - **Batch size**: 64
 - **Epochs**: 15
-- **Data augmentation**: Apenas flips horizontal e vertical
+- **Data augmentation**: Only horizontal and vertical flips
 - **Dropout**: 0.25 (conv) / 0.5 (dense)
 
-#### Experimento 2: Alta Capacidade
+#### Experiment 2: High Capacity
 
-- **Otimizador**: Adam (lr=0.0001)
+- **Optimizer**: Adam (lr=0.0001)
 - **Loss**: Binary Crossentropy
 - **Batch size**: 64
 - **Epochs**: 20
-- **Data augmentation**: Apenas flips horizontal e vertical
+- **Data augmentation**: Only horizontal and vertical flips
 - **Dropout**: 0.3 (conv) / 0.5 (dense)
 
-#### Experimento 3: Augmentation Agressivo
+#### Experiment 3: Aggressive Augmentation
 
-- **Otimizador**: Adam (lr=0.0005)
+- **Optimizer**: Adam (lr=0.0005)
 - **Loss**: Binary Crossentropy
 - **Batch size**: 32
 - **Epochs**: 20
-- **Data augmentation**: Flips + rotação (15°) + zoom (0.1) + shifts (0.1)
+- **Data augmentation**: Flips + rotation (15°) + zoom (0.1) + shifts (0.1)
 - **Dropout**: 0.4 (conv) / 0.6 (dense)
 
-### Callbacks (Comuns a todos)
+### Callbacks (Common to all)
 
-- **Early Stopping**: Monitora `val_loss` com patience=3
-- **Model Checkpoint**: Salva melhor modelo baseado em `val_accuracy`
-- **ReduceLROnPlateau**: Reduz learning rate quando `val_loss` para de melhorar
+- **Early Stopping**: Monitors `val_loss` with patience=3
+- **Model Checkpoint**: Saves best model based on `val_accuracy`
+- **ReduceLROnPlateau**: Reduces learning rate when `val_loss` stops improving
 
-### Métricas Avaliadas
+### Evaluated Metrics
 
-- Acurácia (Accuracy)
-- Precisão (Precision)
-- Recall (Sensibilidade)
+- Accuracy
+- Precision
+- Recall (Sensitivity)
 - F1-Score
 - AUC (Area Under Curve)
-- Matriz de Confusão
+- Confusion Matrix
 
-## 📈 Resultados
+## 📈 Results
 
-### Resultados por Experimento
+### Results by Experiment
 
-| Experimento                | Acurácia   | Precision | Recall | F1-Score   |
-| -------------------------- | ---------- | --------- | ------ | ---------- |
-| **Baseline (Paper)**       | 93.34%     | 0.9070    | 0.9659 | 0.9355     |
-| **Alta Capacidade**        | 94.32%     | 0.9348    | 0.9528 | 0.9437     |
-| **Augmentation Agressivo** | **94.61%** | 0.9235    | 0.9728 | **0.9475** |
+| Experiment                  | Accuracy   | Precision | Recall | F1-Score   |
+| --------------------------- | ---------- | --------- | ------ | ---------- |
+| **Baseline (Paper)**        | 93.34%     | 0.9070    | 0.9659 | 0.9355     |
+| **High Capacity**           | 94.32%     | 0.9348    | 0.9528 | 0.9437     |
+| **Aggressive Augmentation** | **94.61%** | 0.9235    | 0.9728 | **0.9475** |
 
-### Análise Comparativa
+### Comparative Analysis
 
-- **Melhor resultado**: Experimento 3 (Augmentation Agressivo) com 94.61% de acurácia
-- **Comparação com paper**: Todos os experimentos ficaram abaixo da acurácia reportada (97%), mas com resultados consistentes e próximos
+- **Best result**: Experiment 3 (Aggressive Augmentation) with 94.61% accuracy
+- **Comparison with paper**: All experiments fell below the reported accuracy (97%), but with consistent and close results
 - **Insights**:
-  - Aumentar a capacidade da rede (Exp 2) melhorou ligeiramente os resultados
-  - Data augmentation agressivo + regularização (Exp 3) obteve o melhor desempenho geral
+  - Increasing network capacity (Exp 2) slightly improved results
+  - Aggressive data augmentation + regularization (Exp 3) achieved the best overall performance
 
-### Artefatos Gerados
+### Generated Artifacts
 
-O notebook gera automaticamente:
+The notebook automatically generates:
 
-- **Modelos treinados**: `.h5` files para cada experimento
-- **Histórico de treinamento**: JSON com métricas por época
-- **Relatórios de classificação**: Text files com métricas detalhadas
-- **Gráficos de treinamento**: Curvas de loss, accuracy, precision e recall
-- **Matrizes de confusão**: Visualizações para cada experimento
-- **Gráficos comparativos**: Comparação de acurácia, F1-score e métricas entre experimentos
-- **Tabela comparativa**: CSV com todos os resultados
+- **Trained models**: `.h5` files for each experiment
+- **Training history**: JSON with metrics per epoch
+- **Classification reports**: Text files with detailed metrics
+- **Training charts**: Loss, accuracy, precision, and recall curves
+- **Confusion matrices**: Visualizations for each experiment
+- **Comparative charts**: Comparison of accuracy, F1-score, and metrics between experiments
+- **Comparative table**: CSV with all results
 
-## 🔗 Referências
+## 🔗 References
 
 - **Paper**: "Efficient deep learning-based approach for malaria detection using red blood cell smears" - Scientific Reports, 2024
 - **Dataset**: [Malaria Cell Images Dataset - Kaggle](https://www.kaggle.com/datasets/iarunava/cell-images-for-detecting-malaria)
 
-## 📝 Licença
+## 📝 License
 
-Este projeto é para fins educacionais e de pesquisa.
+This project is for educational and research purposes.
 
-## 🎯 Objetivos do Estudo
+## 🎯 Study Objectives
 
-Este projeto foi desenvolvido para:
+This project was developed to:
 
-1. **Validar a implementação**: Replicar o baseline do paper para garantir correção
-2. **Explorar variações**: Testar diferentes estratégias (capacidade vs augmentation)
-3. **Comparar abordagens**: Identificar qual configuração funciona melhor
-4. **Gerar insights**: Entender trade-offs entre complexidade e desempenho
+1. **Validate the implementation**: Replicate the paper baseline to ensure correctness
+2. **Explore variations**: Test different strategies (capacity vs augmentation)
+3. **Compare approaches**: Identify which configuration works best
+4. **Generate insights**: Understand trade-offs between complexity and performance
 
-## 📝 Notas Técnicas
+## 📝 Technical Notes
 
 - **Framework**: TensorFlow 2.20.0 / Keras 3.12.0
-- **Reprodutibilidade**: Seeds fixos (42) para garantir resultados reproduzíveis
-- **GPU**: Suporta GPU, mas funciona também em CPU
-- **Tempo de treinamento**: ~15-20 minutos por experimento em CPU moderno
+- **Reproducibility**: Fixed seeds (42) to ensure reproducible results
+- **GPU**: Supports GPU, but also works on CPU
+- **Training time**: ~15-20 minutes per experiment on modern CPU
 
-## 👥 Autor
+## 👥 Author
 
-Implementado como estudo comparativo baseado nas especificações do paper científico mencionado.
+Implemented as a comparative study based on the specifications of the mentioned scientific paper.
